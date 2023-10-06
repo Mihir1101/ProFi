@@ -1,0 +1,11 @@
+.token-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90wh;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px;
+}

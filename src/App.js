@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosGraph from './constant/graph/axiosGraph';
 import { graphid } from './constant/graph/graphid';
 import PushMessage from './components/PushMessage';
+import { tokenImage } from './constant/images/images';
 import './styles/App.css';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
           query: `
           {
             assetPairs(
-              where: {id_in: ["ETH/USD", "AAVE/USD", "LINK/USD", "MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD"]}
+              where: {id_in: ["ETH/USD", "AAVE/USD", "LINK/USD", "MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD", "USDT/USD"]}
               orderBy: currentPrice
               orderDirection: desc
             ) {
@@ -33,13 +34,16 @@ function App() {
     <main>
       {data ? (
         <div>
-          <div>
-          {data.map((item, index) => (
-            <div key={index} className='token-card'>
-              <h3>{item.id}</h3>
-              <h3>{item.currentPrice}</h3>
-            </div>
-          ))}
+          <div className='card-container'>
+            {data.map((item, index) => (
+              <div key={index} className='card'>
+                <div className='textBox'>
+                <span className='head'>{item.id}</span>
+                <span className='price'>{item.currentPrice}</span>
+                </div>
+                <img srcSet={tokenImage(item.id)} className='img' height='100vh'></img>
+              </div>
+            ))}
           </div>
           <PushMessage />
         </div>

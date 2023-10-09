@@ -84,7 +84,6 @@ body{
 
 .card:hover>.img {
     height: 65%;
-    filter: blur(7px);
     animation: anim 3s infinite;
 }
 

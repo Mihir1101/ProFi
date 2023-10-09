@@ -1,8 +1,13 @@
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.stats import norm
-import statistics
+
+def normalize_between_zero_and_one(value):
+    while value >= 1.0:
+        value /= 10.0
+    while value < 0.0:
+        value *= 10.0
+    return value
 
 # Initialize empty lists for each column
 open_data = []
@@ -42,13 +47,15 @@ op_mean = volume_array.mean()
 op_std = volume_array.std()
 op_var = volume_array.var()
 
-my_array = np.zeros(np.size(open_array))
+markets_for_doge = 415
+twitter_followers_for_doge = 3800000
+github_commits_for_doge = 1421
 
-for i in range(np.size(open_array)):
-    my_array[i] = abs(marketCap_array[i] / volume_array[i])
+algo_array = np.zeros(np.size(open_array))
 
-
-
-plt.plot(timestamp_array,volume_array)
+for i in range(len(algo_array) - 1):
+    algo_array[i] = (2 * normalize_between_zero_and_one(abs((high_array[i] - low_array[i]) / (close_array[i] - open_array[i])))) + (2 * (1 - (abs(marketCap_array[i] - marketCap_array[i+1])) / 100000000000)) + (2 * (1 - (abs(volume_array[i] - volume_array[i+1])) / 100000000000)) + (1 * ((markets_for_doge) / 10000)) + (2 * ((github_commits_for_doge) / 100000))
+print(algo_array.mean())
+plt.plot(timestamp_array,algo_array)
 plt.title("Doge")
 plt.show()

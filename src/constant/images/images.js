@@ -11,17 +11,29 @@ export function tokenImage(id) {
   switch (id) {
     case 'AAVE/USD':
       return aave;
+    case 'AAVE/ETH':
+      return aave;
+    case 'BTC/USD':
+      return btc;
     case 'BTC/USD':
       return btc;
     case 'ETH/USD':
       return eth;
     case 'LINK/USD':
       return link;
+    case 'LINK/ETH':
+      return link;
     case 'MATIC/USD':
+      return matic;
+    case 'MATIC/ETH':
       return matic;
     case 'DOGE/USD':
       return doge;
+    case 'DOGE/ETH':
+      return doge;
     case 'LTC/USD':
+      return ltc;
+    case 'LTC/ETH':
       return ltc;
     default:
       return none;

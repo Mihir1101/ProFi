@@ -7,15 +7,39 @@ import './styles/App.css';
 
 function App() {
   const [data, setData] = useState([]);
+  const [currentState, setCurrentState] = useState("USD");
+
+  function changeCurrentState() {
+    if (currentState === "USD") {
+      setCurrentState("ETH");
+    } else {
+      setCurrentState("USD");
+    }
+  }
+
+  function returnOppositeState() {
+    if (currentState === "USD") {
+      return "ETH";
+    } else {
+      return "USD";
+    }
+  }
+
   useEffect(() => {
-    const fetchdata = async () => {
-      const data = await axiosGraph.post(
-        `${graphid}`,
-        {
-          query: `
+    const interval = setInterval(() => {
+      fetchdata();
+    }, 1000);
+    return () => clearInterval(interval);
+  });
+
+  const fetchdata = async () => {
+    const data = await axiosGraph.post(
+      `${graphid}`,
+      {
+        query: `
           {
             assetPairs(
-              where: {id_in: ["ETH/USD", "AAVE/USD", "LINK/USD", "MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD", "USDT/USD"]}
+              where: {id_in: ["ETH/${currentState}", "AAVE/${currentState}", "LINK/${currentState}", "MATIC/${currentState}","DOGE/${currentState}", "LTC/${currentState}", "BTC/${currentState}", "MTN/${currentState}"]}
               orderBy: currentPrice
               orderDirection: desc
             ) {
@@ -24,22 +48,24 @@ function App() {
             }
           }
           `
-        }
-      );
-      setData(data.data.data.assetPairs);
-    }
-    fetchdata();
-  }, []);
+      }
+    );
+    setData(data.data.data.assetPairs);
+  }
+  fetchdata();
+
   return (
     <main>
       {data ? (
         <div>
+          <h1 className='header'>Tokens</h1>
+          <button className='btn' onClick={changeCurrentState} >Convert to {returnOppositeState()}</button>
           <div className='card-container'>
             {data.map((item, index) => (
               <div key={index} className='card'>
                 <div className='textBox'>
-                <span className='head'>{item.id}</span>
-                <span className='price'>{item.currentPrice}</span>
+                  <span className='head'>{item.id}</span>
+                  <span className='price'>{item.currentPrice}</span>
                 </div>
                 <img srcSet={tokenImage(item.id)} className='img' height='100vh'></img>
               </div>

@@ -11,6 +11,13 @@ def normalize_between_zero_and_one(value):
         value *= 10.0
     return value
 
+
+def buddy(val1,val2):
+    if(val1 > val2):
+        return 1
+    else:
+        return 0
+
 # Initialize empty lists for each column
 open_data = []
 high_data = []
@@ -56,7 +63,7 @@ github_commits_for_op = 14106
 algo_array = np.zeros(np.size(open_array))
 
 for i in range(len(algo_array) - 1):
-    algo_array[i] = (2 * normalize_between_zero_and_one(abs((high_array[i] - low_array[i]) / (close_array[i] - open_array[i])))) + (2 * (1 - (abs(marketCap_array[i] - marketCap_array[i+1])) / 100000000000)) + (2 * (1 - (abs(volume_array[i] - volume_array[i+1])) / 100000000000)) + (1 * ((markets_for_op) / 10000)) + (2 * ((github_commits_for_op) / 100000))
+    algo_array[i] = (2 * normalize_between_zero_and_one(abs((high_array[i] - low_array[i]) / (close_array[i] - open_array[i])))) + (2 * (1 - (abs(marketCap_array[i] - marketCap_array[i+1])) / 100000000000)) + (2 * (1 - (abs(volume_array[i] - volume_array[i+1])) / 100000000000)) + (1 * ((markets_for_op) / 10000)) + (2 * ((github_commits_for_op) / 100000)) + buddy(close_array[i],open_array[i])
 print(algo_array.mean())
 plt.plot(timestamp_array,algo_array)
 

@@ -53,9 +53,6 @@ volume_array = np.array(volume_data)
 marketCap_array = np.array(marketCap_data)
 timestamp_array = np.array(timestamp_data)
 
-op_mean = volume_array.mean()
-op_std = volume_array.std()
-op_var = volume_array.var()
 markets_for_arb = 261
 twitter_followers_for_arb = 871100
 github_commits_for_arb = 9413

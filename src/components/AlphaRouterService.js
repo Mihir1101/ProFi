@@ -4,23 +4,23 @@ const { ethers, BigNumber } = require('ethers')
 const JSBI = require('jsbi')
 const ERC20ABI = require('./abi.json')
 
-const V3_SWAP_ROUTER_ADDRESS = '0xE592427A0AEce92De3Edee1F18E0157C05861564'
-const REACT_APP_INFURA_URL_TESTNET = "https://goerli.infura.io/v3/b0c839bc66db463abcbcc1788877e838"
+const V3_SWAP_ROUTER_ADDRESS = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
+const REACT_APP_INFURA_URL_TESTNET = "https://mainnet.infura.io/v3/b0c839bc66db463abcbcc1788877e838"
 
-const chainId = 5
+const chainId = 1
 
 const web3Provider = new ethers.providers.JsonRpcProvider(REACT_APP_INFURA_URL_TESTNET)
 const router = new AlphaRouter({ chainId: chainId, provider: web3Provider })
 
-const name0 = 'Wrapped Ether'
-const symbol0 = 'WETH'
+const name0 = 'Tether USD'
+const symbol0 = 'USDT'
 const decimals0 = 18
-const address0 = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
+const address0 = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
 
-const name1 = 'Arbitrum'
-const symbol1 = 'WETH'
+const name1 = 'Uniswap'
+const symbol1 = 'UNI'
 const decimals1 = 18
-const address1 = '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'
+const address1 = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984'
 
 const WETH = new Token(chainId, address0, decimals0, symbol0, name0)
 const UNI = new Token(chainId, address1, decimals1, symbol1, name1)

@@ -135,7 +135,7 @@ function TokenDetail() {
           <div className="swapBody">
             <CurrencyField
               field="input"
-              tokenName="WETH"
+              tokenName="USDT"
               getSwapPrice={getSwapPrice}
               signer={signer}
               balance={wethAmount} />

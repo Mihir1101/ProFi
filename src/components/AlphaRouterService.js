@@ -12,10 +12,10 @@ const chainId = 1
 const web3Provider = new ethers.providers.JsonRpcProvider(REACT_APP_INFURA_URL_TESTNET)
 const router = new AlphaRouter({ chainId: chainId, provider: web3Provider })
 
-const name0 = 'Tether USD'
-const symbol0 = 'USDT'
+const name0 = 'Wrapped Ether'
+const symbol0 = 'WETH'
 const decimals0 = 18
-const address0 = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
+const address0 = '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599'
 
 const name1 = 'Uniswap'
 const symbol1 = 'UNI'

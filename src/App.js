@@ -14,11 +14,13 @@ function App() {
     const fetchdata = async () => {
       const data = await axiosGraph.post(
         `${graphid}`,
-        {
+        { 
+          //More lokens can be queried some of them are !!!
+          //"MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD"
           query: `
             {
               assetPairs(
-                where: {id_in: ["ETH/USD", "AAVE/USD", "LINK/USD", "MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD", "MTN/USD"]}
+                where: {id_in: ["ETH/USD", "AAVE/USD", "LINK/USD", "MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD"]}
                 orderBy: currentPrice
                 orderDirection: desc
               ) {

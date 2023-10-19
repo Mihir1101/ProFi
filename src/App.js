@@ -5,6 +5,7 @@ import { graphid } from './constant/graph/graphid';
 import PushMessage from './components/PushMessage';
 import { tokenImage } from './constant/images/images';
 import './styles/App.css';
+import TokenDetail from './components/TokenDetail';
 
 function App() {
   const [data, setData] = useState([]);
@@ -28,7 +29,6 @@ function App() {
             `
         }
       );
-      console.log(data);
       setData(data?.data?.data?.assetPairs);
     }
     fetchdata();
@@ -43,13 +43,13 @@ function App() {
           <h1 className='header'>Tokens</h1>
           <div className='card-container'>
             {data.map((item, index) => (
-              <Link key={index} to={`/id/${item.id}`} className='card'>
-                <div className='textBox'>
-                  <span className='head'>{item.id}</span>
-                  <span className='price'>{item.currentPrice}</span>
+                <div key={index} className='card'>
+                  <div className='textBox'>
+                    <span className='head'>{item.id}</span>
+                    <span className='price'>{item.currentPrice}</span>
+                  </div>
+                  <img srcSet={tokenImage(item.id)} className='img' height='100vh'></img>
                 </div>
-                <img srcSet={tokenImage(item.id)} className='img' height='100vh'></img>
-              </Link>
             ))}
           </div>
           <PushMessage />
@@ -58,8 +58,6 @@ function App() {
         <h1>loading</h1>
       )}
     </main>
-
-
   );
 }
 

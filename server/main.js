@@ -4,7 +4,7 @@ const fs = require("fs");
 const port = 6969;
 const { Web3 } = require('web3');
 require('dotenv').config();
-const contractAddressArray = ["0x89F901ae61DaBc7df104137DfeF621c260f65C25", "", "", "", "", "", "", "", ""]; // change to where the contract for each token is deployed
+const contractAddressArray = ["0x7512fBd4A1186Dc1F465D3F60a9a323c72d406CA", "", "", "", "", "", "", "", ""]; // change to where the contract for each token is deployed
 // const blockParameter = 'latest';
 // const gasLimit = 200000; // Set your desired gas limit
 // // If you are using an EIP-1559 transaction, also set the following parameters:
@@ -12,6 +12,7 @@ const contractAddressArray = ["0x89F901ae61DaBc7df104137DfeF621c260f65C25", "", 
 // const maxFeePerGas = '2000000000'; // Replace with your desired maxFeePerGas
 const TOKENS = ["ARB", "BNB", "BTC", "DOGE", "ETH", "OP", "PEPE", "PUSH", "USDT"]
 let contractABIArray = ["", "", "", "", "", "", "", "", ""];
+let DeployerArray = ["0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b","","","","","","","",""];
 
 for (let i = 0; i < TOKENS.length; i++) {
     fs.readFile(`../contracts/out/${TOKENS[i]}.sol/${TOKENS[i]}.json`, 'utf8', (err, data) => {
@@ -50,29 +51,25 @@ app.use(express.static("public")); // to view static files
 //                     ROUTES
 // ========================================================
 
-app.post("/tokens/:token/update/Twitter_Followers", async (req, res) => {
-    if (TOKENS.includes(req.params.token)) {
-
-    }
-})
-
 app.get("/tokens/:token", async (req, res) => {
     if (TOKENS.includes(req.params.token)) {
         console.log(req.params.token);
         const web3 = new Web3(process.env.RPC_URL);
         let contractAddress;
         let contractABI;
+        let Deployer;
         for (let i = 0; i < TOKENS.length; i++) {
             if (TOKENS[i] == req.params.token) {
                 contractAddress = contractAddressArray[i];
                 contractABI = contractABIArray[i];
+                Deployer = DeployerArray[i];
                 break;
             }
         }
         console.log("ABI", contractABI);
         console.log("Address", contractAddress);
         // const contract = new web3.eth.Contract(contractABI, contractAddress);
-        res.status(200).render("index", { token: req.params.token, contractABI: contractABI, contractAddress: contractAddress });
+        res.status(200).render("index", { token: req.params.token, contractABI: contractABI, contractAddress: contractAddress,Deployer : Deployer });
     }
 });
 

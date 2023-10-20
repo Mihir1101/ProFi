@@ -9,19 +9,19 @@ import none from '../../stock/tokens/null.png';
 
 export function tokenImage(id) {
   switch (id) {
-    case 'AAVE/USD':
+    case 'AAVE':
       return aave;
-    case 'BTC/USD':
+    case 'BTC':
       return btc;
-    case 'ETH/USD':
+    case 'ETH':
       return eth;
-    case 'LINK/USD':
+    case 'LINK':
       return link;
-    case 'MATIC/USD':
+    case 'MATIC':
       return matic;
-    case 'DOGE/USD':
+    case 'DOGE':
       return doge;
-    case 'LTC/USD':
+    case 'LTC':
       return ltc;
     default:
       return none;

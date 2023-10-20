@@ -5,7 +5,6 @@ import { graphid } from './constant/graph/graphid';
 import PushMessage from './components/PushMessage';
 import { tokenImage } from './constant/images/images';
 import './styles/App.css';
-import TokenDetail from './components/TokenDetail';
 
 function App() {
   const [data, setData] = useState([]);
@@ -44,17 +43,21 @@ function App() {
         <div>
           <h1 className='header'>Tokens</h1>
           <div className='card-container'>
-            {data.map((item, index) => (
-              <a  href='http://localhost:6969/tokens/shogo'>
-                <div key={index} className='card'>
-                  <div className='textBox'>
-                    <span className='head'>{item.id}</span>
-                    <span className='price'>{item.currentPrice}</span>
+          {data.map((item, index) => {
+              // Split the token ID and take the part before "/USD"
+              const tokenId = item.id.split('/')[0];
+              return (
+                <Link to={`http://localhost:6969/tokens/${tokenId}`} key={index}>
+                  <div className='card'>
+                    <div className='textBox'>
+                      <span className='head'>{tokenId}</span>
+                      <span className='price'>$ {item.currentPrice}</span>
+                    </div>
+                    <img srcSet={tokenImage(tokenId)} className='img' height='100vh' alt={tokenId} />
                   </div>
-                  <img srcSet={tokenImage(item.id)} className='img' height='100vh'></img>
-                </div>
-              </a>
-            ))}
+                </Link>
+              );
+            })}
           </div>
           <PushMessage />
         </div>

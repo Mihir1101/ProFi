@@ -55,7 +55,6 @@ op_std = volume_array.std()
 op_var = volume_array.var()
 
 markets_for_eth = 3917
-twitter_followers_for_eth = 3100000
 github_commits_for_eth = 14561
 
 algo_array = np.zeros(np.size(open_array))

@@ -54,7 +54,6 @@ op_std = volume_array.std()
 op_var = volume_array.var()
 
 markets_for_btc = 6056
-twitter_followers_for_btc = 6000000
 github_commits_for_btc = 38977
 
 algo_array = np.zeros(np.size(open_array))

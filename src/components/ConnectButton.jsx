@@ -13,7 +13,7 @@ const ConnectButton = props => {
         </div>
       ) : (
         <div
-          className="btn my-2 connectButton"
+          className="connectButton"
           onClick={() => getSigner(provider)}
         >
           Connect Wallet

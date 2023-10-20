@@ -6,22 +6,22 @@ const CurrencyField = props => {
   }
 
   return (
-    <div className="row currencyInput">
-      <div className="col-md-6 numberContainer">
+    <div className="currencyInput">
+      <div className="numberContainer">
         {props.loading ? (
-          <div className="spinnerContainer">
+          <div className="btn-grad">
             <props.spinner />
           </div>
         ) : (
           <input
-            className="currencyInputField"
+            className="btn-grad"
             placeholder="0.0"
             value={props.value}
             onBlur={e => (props.field === 'input' ? getPrice(e.target.value) : null)}
           />
         )}
       </div>
-      <div className="col-md-6 tokenContainer">
+      <div className="tokenContainer">
         <span className="tokenName">{props.tokenName}</span>
         <div className="balanceContainer">
           <span className="balanceAmount">Balance: {props.balance?.toFixed(3)}</span>

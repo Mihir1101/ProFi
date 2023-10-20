@@ -112,9 +112,6 @@ function TokenDetail() {
         <div className="cardSwap">
           <div className="heading">
             <span className="swapText">Swap</span>
-            <span className="gearContainer" onClick={() => setShowModal(true)}>
-              <GearFill />
-            </span>
             {showModal && (
               <ConfigModal
                 onClose={() => setShowModal(false)}
@@ -150,7 +147,7 @@ function TokenDetail() {
             )}
           </div>
 
-          <div className="swapButtonContainer">
+          <div className="btn-grad">
             {isConnected() ? (
               <div
                 onClick={() => runSwap(transaction, signer)}

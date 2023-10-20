@@ -4,6 +4,18 @@ pragma solidity ^0.8.18;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract BNB is Ownable {
+    // =========================================================
+    //                      Safe Math
+    // =========================================================
+
+    function SafeSub(uint256 a, uint256 b) public pure returns (uint256) {
+        if (a < b) {
+            return (b - a);
+        } else {
+            return (a - b);
+        }
+    }
+
     // ========================================================
     //        Storage Variables, events and constructors
     // ========================================================
@@ -15,7 +27,6 @@ contract BNB is Ownable {
     uint256[] private volume;
     uint256[] private marketCap;
     uint256 private markets;
-    uint256 private twitter_followers;
     uint256 private github_commits;
     uint256[] private algo_array;
 
@@ -27,7 +38,6 @@ contract BNB is Ownable {
         volume = new uint256[](0);
         marketCap = new uint256[](0);
         markets = 0;
-        twitter_followers = 0;
         github_commits = 0;
         algo_array = new uint256[](0);
     }
@@ -37,39 +47,35 @@ contract BNB is Ownable {
     // ========================================================
 
     function addOpen(uint256 item) public onlyOwner {
-        open.push(item * 1e10);
+        open.push(item);
     }
 
     function addClose(uint256 item) public onlyOwner {
-        close.push(item * 1e10);
+        close.push(item);
     }
 
     function addHigh(uint256 item) public onlyOwner {
-        high.push(item * 1e10);
+        high.push(item);
     }
 
     function addLow(uint256 item) public onlyOwner {
-        low.push(item * 1e10);
+        low.push(item);
     }
 
     function addVolume(uint256 item) public onlyOwner {
-        volume.push(item * 1e10);
+        volume.push(item);
     }
 
     function addMarketCap(uint256 item) public onlyOwner {
-        marketCap.push(item * 1e10);
+        marketCap.push(item);
     }
 
     function update_markets(uint256 item) public onlyOwner {
-        markets = item * 1e10;
-    }
-
-    function update_twitter_followers(uint256 item) public onlyOwner {
-        twitter_followers = item * 1e10;
+        markets = item;
     }
 
     function update_github_commits(uint256 item) public onlyOwner {
-        github_commits = item * 1e10;
+        github_commits = item;
     }
 
     // ========================================================
@@ -88,7 +94,6 @@ contract BNB is Ownable {
             uint256[] memory,
             uint256,
             uint256,
-            uint256,
             uint256[] memory
         )
     {
@@ -100,7 +105,6 @@ contract BNB is Ownable {
             volume,
             marketCap,
             markets,
-            twitter_followers,
             github_commits,
             algo_array
         );
@@ -165,12 +169,8 @@ contract BNB is Ownable {
             }
             uint256 algo = (2 * normalize_between_zero_and_1e10(result)) +
                 (2 *
-                    (1e10 -
-                        ((abs((int256)(marketCap[i] - marketCap[i + 1]))) /
-                            1e11))) +
-                (2 *
-                    (1e10 -
-                        ((abs((int256)(volume[i] - volume[i + 1]))) / 1e11))) +
+                    (1e10 - (SafeSub(marketCap[i], marketCap[i + 1]) / 1e11))) +
+                (2 * (1e10 - (SafeSub(volume[i], volume[i + 1]) / 1e11))) +
                 (1 * ((markets) / 1e4)) +
                 (2 * ((github_commits) / 1e5)) +
                 (1e10 * check_size(close[i], open[i]));

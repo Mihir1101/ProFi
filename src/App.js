@@ -45,6 +45,7 @@ function App() {
           <h1 className='header'>Tokens</h1>
           <div className='card-container'>
             {data.map((item, index) => (
+              <a  href='http://localhost:6969/tokens/shogo'>
                 <div key={index} className='card'>
                   <div className='textBox'>
                     <span className='head'>{item.id}</span>
@@ -52,6 +53,7 @@ function App() {
                   </div>
                   <img srcSet={tokenImage(item.id)} className='img' height='100vh'></img>
                 </div>
+              </a>
             ))}
           </div>
           <PushMessage />

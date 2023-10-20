@@ -1,11 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=token%></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.9/web3.min.js"></script>
+    <title>
+        <%= token%>
+    </title>
 </head>
+
 <body>
-    
+    <h1>
+        <%= contractAddress %>
+    </h1>
+    <button id="get_params">Get Params</button>
+    <button id="gen_algo">Generate Algo Array</button>
+    <button id="get_safeness">Get Safeness Score</button>
+    <h1 id="params">Params</h1>
+    <h1 id="algo">algo</h1>
+    <h1 id="Safeness">Safeness</h1>
 </body>
+<script>
+
+    // const Web3 = require('web3');
+    // // web3 lib instance
+    const web3 = new Web3(window.ethereum);
+
+    let GetParams = document.getElementById("get_params");
+    let GenAlgo = document.getElementById("gen_algo");
+    let GetSafeness = document.getElementById("get_safeness");
+    let params = document.getElementById("params");
+    let algo = document.getElementById("algo");
+    let Safeness = document.getElementById("Safeness");
+
+
+
+    GetParams.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+            const result = await contract.methods.getParams().call();
+            // const data = contract.methods.getParams().encodeABI();
+            // const gas = await contract.methods.getParams().estimateGas({ to: ContractAddress, from: senderAddress, data });
+            // const nonce = await web3.eth.getTransactionCount(senderAddress);
+            // console.log(data);
+            // console.log(gas);
+            // console.log(nonce);
+            // const tx = {
+            //     from: senderAddress,
+            //     to: ContractAddress,
+            //     gas,
+            //     data,
+            //     nonce,
+            // };
+            // console.log(tx);
+            // const result = await web3.eth.sendTransaction(tx);
+            console.log(result);
+            const open = result[0];
+            const close = result[1];
+            const high = result[2];
+            const low = result[3];
+            const volume = result[4];
+            const marketCap = result[5];
+            const markets = result[6];
+            const twitterFollowers = result[7];
+            const githubCommits = result[8];
+            const algoArray = result[9];
+            console.log('Open:', open);
+            console.log('Close:', close);
+            console.log('High:', high);
+            console.log('Low:', low);
+            console.log('Volume:', volume);
+            console.log('Market Cap:', marketCap);
+            console.log('Markets:', markets);
+            console.log('Twitter Followers:', twitterFollowers);
+            console.log('GitHub Commits:', githubCommits);
+            console.log('Algo Array:', algoArray);
+            // params.innerHTML = result;
+            // console.log('Transaction Hash:', result.transactionHash);
+        }
+    })
+
+
+</script>
+
 </html>

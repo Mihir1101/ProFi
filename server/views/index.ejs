@@ -5,21 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.9/web3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>
         <%= token%>
     </title>
 </head>
 <link rel="stylesheet" href="/css/index.css">
+
 <body>
     <button id="connectButton" class="glow-border" onclick="connectOrDisconnect();">Connect Wallet</button>
-    <h1>
-        <%= contractAddress %>
-    </h1>
-    <button id="get_params">Get Params</button>
+    <div class="heroDiv">
+        <div class="leftDiv">
+            <p id="safeScore"></p>
+            <button id="get_safeness">Get Safeness Score</button>
+        </div>
+        <div class="centerDiv">
+            <h1>
+                <span id="contractAddressDisplay">
+                    <%= contractAddress.slice(0, 5) + "..." + contractAddress.slice(-5) %>
+                </span>
+                <button id="copyAddressButton" onclick="copyAddress()">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </h1>
+        </div>
+        <div class="rightDiv">
+            <button id="get_params">Get Params</button>
+        </div>
+    </div>
+    <!-- 
     <hr>
     <button id="gen_algo">Generate Algo Array</button>
     <hr>
-    <button id="get_safeness">Get Safeness Score</button>
     <hr>
     <input type="number" id="open">
     <button id="add_to_open">Add to Open Array</button>
@@ -44,7 +61,7 @@
     <hr>
     <input type="number" id="githubCommits">
     <button id="update_gituhb_commits">Update Github Commits</button>
-    <hr>
+    <hr> -->
 </body>
 
 <script>
@@ -67,6 +84,24 @@
             console.log("No wallet");
         }
     }
+    function copyAddress() {
+        // Create a new text area element to store the contract address
+        const textArea = document.createElement("textarea");
+        textArea.value = "<%= contractAddress %>";
+
+        // Append the text area element to the document
+        document.body.appendChild(textArea);
+
+        // Select and copy the text inside the text area
+        textArea.select();
+        document.execCommand('copy');
+
+        // Remove the text area from the document
+        document.body.removeChild(textArea);
+
+        // Alert the user that the address has been copied
+        alert("Contract address copied to clipboard!");
+    }
 </script>
 
 <script>
@@ -81,6 +116,7 @@
     let params = document.getElementById("params");
     let algo = document.getElementById("algo");
     let Safeness = document.getElementById("Safeness");
+    let safeScore = document.getElementById("safeScore");
 
 
 
@@ -88,7 +124,7 @@
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
             if (accounts.length === 0) {
-                console.log("No Ethereum account connected.");
+                alert("No Ethereum account connected.");
                 return;
             }
 
@@ -138,9 +174,15 @@
             console.log(ContractAddress);
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
             const result = await contract.methods.return_safeness_score().call();
-            console.log("This is the SafeNess Score : ",result);
-            // const SafenessScore = result[0];
-            // console.log("SafeNess Score : ", SafenessScore);
+            console.log("This is the SafeNess Score : ", result);
+            safeScore.innerHTML = result/1e10;
+            if (result/1e10 < 4 && result/1e10 > 0) {
+            safeScoreElement.classList.add("red");
+        } else if (result/1e10 < 6) {
+            safeScoreElement.classList.add("yellow");
+        } else {
+            safeScoreElement.classList.add("green");
+        }
         }
     })
 
@@ -149,7 +191,7 @@
     // ========================================================
 
     let Add_to_Open_Array = document.getElementById("add_to_open");
-    
+
     Add_to_Open_Array.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -168,7 +210,7 @@
             if (DeployerAddress == senderAddress) {
                 let open_value = document.getElementById("open").value;
                 const contract = new web3.eth.Contract(ContractABI, ContractAddress);
-                console.log("open_value : " , open_value);
+                console.log("open_value : ", open_value);
                 const data = contract.methods.addOpen(open_value).encodeABI();
                 const gas = await web3.eth.estimateGas({
                     to: ContractAddress,
@@ -202,7 +244,7 @@
     // ========================================================
 
     let Add_to_Close_Array = document.getElementById("add_to_close");
-    
+
     Add_to_Close_Array.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -254,7 +296,7 @@
     // ========================================================
 
     let Add_to_High_Array = document.getElementById("add_to_high");
-    
+
     Add_to_High_Array.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -262,7 +304,7 @@
                 console.log("No Ethereum account connected.");
                 return;
             }
-            
+
             const senderAddress = accounts[0];
             console.log(senderAddress);
             let ContractABI = <%- JSON.stringify(contractABI) %>;
@@ -306,7 +348,7 @@
     // ========================================================
 
     let Add_to_Low_Array = document.getElementById("add_to_low");
-    
+
     Add_to_Low_Array.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -314,7 +356,7 @@
                 console.log("No Ethereum account connected.");
                 return;
             }
-            
+
             const senderAddress = accounts[0];
             console.log(senderAddress);
             let ContractABI = <%- JSON.stringify(contractABI) %>;
@@ -358,7 +400,7 @@
     // ========================================================
 
     let Add_to_Volume_Array = document.getElementById("add_to_volume");
-    
+
     Add_to_Volume_Array.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -366,7 +408,7 @@
                 console.log("No Ethereum account connected.");
                 return;
             }
-            
+
             const senderAddress = accounts[0];
             console.log(senderAddress);
             let ContractABI = <%- JSON.stringify(contractABI) %>;
@@ -410,7 +452,7 @@
     // ========================================================
 
     let Add_to_Market_Cap_Array = document.getElementById("add_to_MarketCap");
-    
+
     Add_to_Market_Cap_Array.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -462,7 +504,7 @@
     // ========================================================
 
     let update_Market = document.getElementById("update_market");
-    
+
     update_Market.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -470,7 +512,7 @@
                 console.log("No Ethereum account connected.");
                 return;
             }
-            
+
             const senderAddress = accounts[0];
             console.log(senderAddress);
             let ContractABI = <%- JSON.stringify(contractABI) %>;
@@ -514,7 +556,7 @@
     // ========================================================
 
     let update_gituhb_commits = document.getElementById("update_gituhb_commits");
-    
+
     update_gituhb_commits.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -522,7 +564,7 @@
                 console.log("No Ethereum account connected.");
                 return;
             }
-            
+
             const senderAddress = accounts[0];
             console.log(senderAddress);
             let ContractABI = <%- JSON.stringify(contractABI) %>;

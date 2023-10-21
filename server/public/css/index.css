@@ -2,6 +2,16 @@ body {
     background: #121212;
     color: #fff;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#copyAddressButton{
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.7em;
 }
 
 .glow-border {
@@ -25,4 +35,48 @@ body {
 .glow-border:hover {
     background-color: #40c9ff;
     box-shadow: 0 0 20px #40c9ff;
+}
+
+.heroDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    border: 2px solid white;
+}
+.leftDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    flex: 1;
+    height: 100vh;
+}
+.leftDiv>p{
+    font-size: 3em;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1em;
+}
+.rightDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 100vh;
+    border: 2px solid white;
+}
+.centerDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 100vh;
+    border: 2px solid white;
+    padding-right: 4em;
+    padding-left: 4em;
 }

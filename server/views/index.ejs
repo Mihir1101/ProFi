@@ -9,8 +9,9 @@
         <%= token%>
     </title>
 </head>
-
+<link rel="stylesheet" href="/css/index.css">
 <body>
+    <button id="connectButton" class="glow-border" onclick="connectOrDisconnect();">Connect Wallet</button>
     <h1>
         <%= contractAddress %>
     </h1>
@@ -48,6 +49,29 @@
     <button id="update_gituhb_commits">Update Github Commits</button>
     <hr>
 </body>
+
+<script>
+    async function connectOrDisconnect() {
+        if (window.ethereum) {
+            if (window.web3) {
+                // Disconnect wallet
+                window.web3 = null;
+                document.getElementById("connectButton").textContent = "Connect Wallet";
+                console.log("Wallet disconnected");
+            } else {
+                // Connect wallet
+                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                window.web3 = new Web3(window.ethereum);
+                const truncatedAddress = accounts[0].slice(0, 10) + "...";
+                document.getElementById("connectButton").textContent = `${truncatedAddress}`;
+                console.log("Wallet connected");
+            }
+        } else {
+            console.log("No wallet");
+        }
+    }
+</script>
+
 <script>
 
     // const Web3 = require('web3');

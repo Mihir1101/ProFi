@@ -6,7 +6,19 @@ body {
     padding: 0;
 }
 
-#copyAddressButton{
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.green {
+    color: green;
+}
+
+#copyAddressButton {
     background-color: transparent;
     border: none;
     color: #fff;
@@ -15,11 +27,61 @@ body {
 }
 
 .glow-border {
-    background-color: #40c9ff;
+    background-color: #FF007A;
     color: #fff;
     position: absolute;
     right: 0.5%;
     top: 2%;
+    font-size: 1em;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #FF007A;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px #FF007A;
+    transition: box-shadow 0.3s;
+}
+
+.glow-border:hover {
+    background-color: #FF007A;
+    box-shadow: 0 0 20px #FF007A;
+}
+
+.heroDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    /* border: 2px solid white; */
+}
+
+.leftDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid white; */
+    flex: 1;
+    height: 100vh;
+}
+
+.leftDiv>p {
+    font-size: 3em;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1em;
+}
+
+.divBtn {
+    background-color: #40c9ff;
+    color: #fff;
+    position: absolute;
+    bottom: 10%;
     font-size: 1em;
     border: none;
     padding: 10px 20px;
@@ -32,51 +94,57 @@ body {
     transition: box-shadow 0.3s;
 }
 
-.glow-border:hover {
+.divBtn {
     background-color: #40c9ff;
     box-shadow: 0 0 20px #40c9ff;
 }
 
-.heroDiv{
+.rightDiv {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    margin: 0;
-    border: 2px solid white;
+    flex: 1;
+    height: 100vh;
 }
-.leftDiv{
+
+.centerDiv {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid white;
     flex: 1;
     height: 100vh;
 }
-.leftDiv>p{
-    font-size: 3em;
-    font-weight: 600;
+
+.detailLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10em;
+    width: 10em;
+    margin: 2em;
+    animation: heartbeat 5s infinite;
+  transition: transform 0.5s ease-in-out;    
+}
+
+#contractAddressDisplay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
     margin: 0;
     padding: 0;
-    margin-bottom: 1em;
+    width: 100%;
 }
-.rightDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    height: 100vh;
-    border: 2px solid white;
-}
-.centerDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    height: 100vh;
-    border: 2px solid white;
-    padding-right: 4em;
-    padding-left: 4em;
-}
+
+@keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }

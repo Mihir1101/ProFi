@@ -17,24 +17,46 @@
     <div class="heroDiv">
         <div class="leftDiv">
             <p id="safeScore"></p>
-            <button id="get_safeness">Get Safeness Score</button>
+            <button id="get_safeness" class="divBtn" >Get Safe Score</button>
         </div>
         <div class="centerDiv">
             <h1>
-                <span id="contractAddressDisplay">
+                    <% if (token === 'ETH') { %>
+                        <img src="../stock/eth.png" class="detailLogo">
+                    <% } else if (token === 'BTC') { %>
+                        <img src="../stock/btc.png" class="detailLogo">
+                    <% } else if (token === 'DOGE') { %>
+                        <img src="../stock/doge.png" class="detailLogo">
+                    <% } else if (token === 'USDT') { %>
+                        <img src="../stock/usdt.png" class="detailLogo">
+                    <% } else { %>
+                        <img src="../stock/noImg.png" class="detailLogo">
+                    <% } %>
+                <p id="contractAddressDisplay">
                     <%= contractAddress.slice(0, 5) + "..." + contractAddress.slice(-5) %>
-                </span>
-                <button id="copyAddressButton" onclick="copyAddress()">
-                    <i class="fas fa-copy"></i>
-                </button>
+                    <button id="copyAddressButton" onclick="copyAddress()">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </p>
             </h1>
         </div>
         <div class="rightDiv">
-            <button id="get_params">Get Params</button>
+            <div id="params">
+                <p id="open"></p>
+                <p id="close"></p>
+                <p id="high"></p>
+                <p id="low"></p>
+                <p id="volume"></p>
+                <p id="MarketCap"></p>
+                <p id="market"></p>
+                <p id="githubCommits"></p>
+            </div>
+            <button id="get_params" class="divBtn">Get Params</button>
         </div>
     </div>
-    <!-- 
-    <hr>
+    <div>
+
+        <hr>
     <button id="gen_algo">Generate Algo Array</button>
     <hr>
     <hr>
@@ -61,7 +83,8 @@
     <hr>
     <input type="number" id="githubCommits">
     <button id="update_gituhb_commits">Update Github Commits</button>
-    <hr> -->
+    <hr>
+    </div>
 </body>
 
 <script>
@@ -102,6 +125,9 @@
         // Alert the user that the address has been copied
         alert("Contract address copied to clipboard!");
     }
+
+    let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+    console.log(DeployerAddress);
 </script>
 
 <script>
@@ -137,24 +163,14 @@
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
             const result = await contract.methods.getParams().call();
             console.log(result);
-            const open = result[0];
-            const close = result[1];
-            const high = result[2];
-            const low = result[3];
-            const volume = result[4];
-            const marketCap = result[5];
-            const markets = result[6];
-            const githubCommits = result[7];
-            const algoArray = result[8];
-            console.log('Open:', open);
-            console.log('Close:', close);
-            console.log('High:', high);
-            console.log('Low:', low);
-            console.log('Volume:', volume);
-            console.log('Market Cap:', marketCap);
-            console.log('Markets:', markets);
-            console.log('GitHub Commits:', githubCommits);
-            console.log('Algo Array:', algoArray);
+            document.getElementById("open").innerHTML = "Open : "+result[0][result[0].length - 2]/1e10;
+            document.getElementById("close").innerHTML = "Close : "+result[1][result[1].length - 1]/1e10;
+            document.getElementById("high").innerHTML= "High : "+result[2][result[2].length - 1]/1e10;
+            document.getElementById("low").innerHTML= "Low : "+result[3][result[3].length - 1]/1e10;
+            document.getElementById("volume").innerHTML= "Volume : "+result[4][result[4].length - 1];
+            document.getElementById("MarketCap").innerHTML = "Market Cap : "+result[5][result[5].length - 1];
+            document.getElementById("markets").innerHTML = "Current number of DEX's : "+result[6][result[6].length - 1];
+            document.getElementById("githubCommits").innerHTML = "Github Commit : "+result[7][result[7].length - 1];
         }
     })
 
@@ -175,13 +191,15 @@
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
             const result = await contract.methods.return_safeness_score().call();
             console.log("This is the SafeNess Score : ", result);
-            safeScore.innerHTML = result/1e10;
             if (result/1e10 < 4 && result/1e10 > 0) {
-            safeScoreElement.classList.add("red");
-        } else if (result/1e10 < 6) {
-            safeScoreElement.classList.add("yellow");
-        } else {
-            safeScoreElement.classList.add("green");
+                safeScore.innerHTML = result/1e10 + "😡";
+                safeScore.classList.add("red");
+            } else if (result/1e10 < 6 && result/1e10 > 4) {
+            safeScore.innerHTML = result/1e10 + "😐";
+            safeScore.classList.add("yellow");
+        } else  if (result/1e10 > 6 && result/1e10 < 10){
+            safeScore.classList.add("green") + "😀";
+            safeScore.innerHTML = result/1e10;
         }
         }
     })

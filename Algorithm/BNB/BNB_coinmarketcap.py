@@ -55,7 +55,6 @@ op_std = volume_array.std()
 op_var = volume_array.var()
 
 markets_for_bnb = 674
-twitter_followers_for_bnb = 3200000
 github_commits_for_bnb = 15121
 
 algo_array = np.zeros(np.size(open_array))

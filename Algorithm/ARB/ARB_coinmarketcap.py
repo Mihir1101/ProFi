@@ -54,7 +54,6 @@ marketCap_array = np.array(marketCap_data)
 timestamp_array = np.array(timestamp_data)
 
 markets_for_arb = 261
-twitter_followers_for_arb = 871100
 github_commits_for_arb = 9413
 
 algo_array = np.zeros(np.size(open_array))

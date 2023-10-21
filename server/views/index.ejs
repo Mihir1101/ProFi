@@ -9,18 +9,69 @@
         <%= token%>
     </title>
 </head>
-
+<link rel="stylesheet" href="/css/index.css">
 <body>
+    <button id="connectButton" class="glow-border" onclick="connectOrDisconnect();">Connect Wallet</button>
     <h1>
         <%= contractAddress %>
     </h1>
     <button id="get_params">Get Params</button>
+    <hr>
     <button id="gen_algo">Generate Algo Array</button>
+    <hr>
     <button id="get_safeness">Get Safeness Score</button>
-    <h1 id="params">Params</h1>
-    <h1 id="algo">algo</h1>
-    <h1 id="Safeness">Safeness</h1>
+    <hr>
+    <input type="number" id="open">
+    <button id="add_to_open">Add to Open Array</button>
+    <hr>
+    <input type="number" id="close">
+    <button id="add_to_close">Add to Close Array</button>
+    <hr>
+    <input type="number" id="high">
+    <button id="add_to_high">Add to High Array</button>
+    <hr>
+    <input type="number" id="low">
+    <button id="add_to_low">Add to Low Array</button>
+    <hr>
+    <input type="number" id="volume">
+    <button id="add_to_volume">Add to Volume Array</button>
+    <hr>
+    <input type="number" id="MarketCap">
+    <button id="add_to_MarketCap">Add to Market Cap Array</button>
+    <hr>
+    <input type="number" id="market">
+    <button id="update_market">Update Markets</button>
+    <hr>
+    <input type="number" id="twitterFollowers">
+    <button id="update_twitter_followers">Update Twitter Followers</button>
+    <hr>
+    <input type="number" id="githubCommits">
+    <button id="update_gituhb_commits">Update Github Commits</button>
+    <hr>
 </body>
+
+<script>
+    async function connectOrDisconnect() {
+        if (window.ethereum) {
+            if (window.web3) {
+                // Disconnect wallet
+                window.web3 = null;
+                document.getElementById("connectButton").textContent = "Connect Wallet";
+                console.log("Wallet disconnected");
+            } else {
+                // Connect wallet
+                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                window.web3 = new Web3(window.ethereum);
+                const truncatedAddress = accounts[0].slice(0, 10) + "...";
+                document.getElementById("connectButton").textContent = `${truncatedAddress}`;
+                console.log("Wallet connected");
+            }
+        } else {
+            console.log("No wallet");
+        }
+    }
+</script>
+
 <script>
 
     // const Web3 = require('web3');
@@ -52,21 +103,6 @@
             console.log(ContractAddress);
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
             const result = await contract.methods.getParams().call();
-            // const data = contract.methods.getParams().encodeABI();
-            // const gas = await contract.methods.getParams().estimateGas({ to: ContractAddress, from: senderAddress, data });
-            // const nonce = await web3.eth.getTransactionCount(senderAddress);
-            // console.log(data);
-            // console.log(gas);
-            // console.log(nonce);
-            // const tx = {
-            //     from: senderAddress,
-            //     to: ContractAddress,
-            //     gas,
-            //     data,
-            //     nonce,
-            // };
-            // console.log(tx);
-            // const result = await web3.eth.sendTransaction(tx);
             console.log(result);
             const open = result[0];
             const close = result[1];
@@ -88,8 +124,542 @@
             console.log('Twitter Followers:', twitterFollowers);
             console.log('GitHub Commits:', githubCommits);
             console.log('Algo Array:', algoArray);
-            // params.innerHTML = result;
-            // console.log('Transaction Hash:', result.transactionHash);
+        }
+    })
+
+    GetSafeness.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+            const result = await contract.methods.return_safeness_score().call();
+            console.log("This is the SafeNess Score : ",result);
+            // const SafenessScore = result[0];
+            // console.log("SafeNess Score : ", SafenessScore);
+        }
+    })
+
+    // ========================================================
+    //                     OPEN
+    // ========================================================
+
+    let Add_to_Open_Array = document.getElementById("add_to_open");
+    
+    Add_to_Open_Array.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let open_value = document.getElementById("open").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                console.log("open_value : " , open_value);
+                const data = contract.methods.addOpen(open_value).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+
+    // ========================================================
+    //                     CLOSE
+    // ========================================================
+
+    let Add_to_Close_Array = document.getElementById("add_to_close");
+    
+    Add_to_Close_Array.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let close_value = document.getElementById("close").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                const data = contract.methods.addClose(close_value).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+
+    // ========================================================
+    //                     HIGH
+    // ========================================================
+
+    let Add_to_High_Array = document.getElementById("add_to_high");
+    
+    Add_to_High_Array.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+            
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let high_value = document.getElementById("high").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                const data = contract.methods.addHigh(high_value).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+
+    // ========================================================
+    //                     LOW
+    // ========================================================
+
+    let Add_to_Low_Array = document.getElementById("add_to_low");
+    
+    Add_to_Low_Array.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+            
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let low_value = document.getElementById("low").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                const data = contract.methods.addLow(low_value).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+
+    // ========================================================
+    //                     VOLUME
+    // ========================================================
+
+    let Add_to_Volume_Array = document.getElementById("add_to_volume");
+    
+    Add_to_Volume_Array.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+            
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let volume_value = document.getElementById("volume").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                const data = contract.methods.addVolume(volume_value).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+
+    // ========================================================
+    //                     MARKET-CAP
+    // ========================================================
+
+    let Add_to_Market_Cap_Array = document.getElementById("add_to_MarketCap");
+    
+    Add_to_Market_Cap_Array.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let marketCapValue = document.getElementById("MarketCap").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                const data = contract.methods.addMarketCap(marketCapValue).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+
+    // ========================================================
+    //                     MARKETS
+    // ========================================================
+
+    let update_Market = document.getElementById("update_market");
+    
+    update_Market.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+            
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let marketValue = document.getElementById("market").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                const data = contract.methods.update_markets(marketValue).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+
+    // ========================================================
+    //                     TWITTER_FOLLOWERS
+    // ========================================================
+
+    let update_twitter_followers = document.getElementById("update_twitter_followers");
+    
+    update_twitter_followers.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+            
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let twitterFollowers = document.getElementById("twitterFollowers").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                const data = contract.methods.update_twitter_followers(twitterFollowers).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+
+    // ========================================================
+    //                     Github_Commits
+    // ========================================================
+
+    let update_gituhb_commits = document.getElementById("update_gituhb_commits");
+    
+    update_gituhb_commits.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+            
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            if (DeployerAddress == senderAddress) {
+                let githubCommits = document.getElementById("githubCommits").value;
+                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+                const data = contract.methods.update_github_commits(githubCommits).encodeABI();
+                const gas = await web3.eth.estimateGas({
+                    to: ContractAddress,
+                    from: senderAddress,
+                    data,
+                });
+                const nonce = await web3.eth.getTransactionCount(senderAddress);
+                const tx = {
+                    from: senderAddress,
+                    to: ContractAddress,
+                    gas,
+                    data,
+                    nonce,
+                };
+                console.log(tx);
+                web3.eth
+                    .sendTransaction(tx)
+                    .on('receipt', (receipt) => {
+                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                        console.log('Transaction Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction Error:', error);
+                    });
+            }
+        }
+    })
+    // ========================================================
+    //                     GENERATE_ALGO
+    // ========================================================
+
+    GenAlgo.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                console.log("No Ethereum account connected.");
+                return;
+            }
+
+            const senderAddress = accounts[0];
+            console.log(senderAddress);
+            let ContractABI = <%- JSON.stringify(contractABI) %>;
+            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
+            console.log(ContractABI);
+            console.log(ContractAddress);
+            const contract = new web3.eth.Contract(ContractABI, ContractAddress);
+            const data = contract.methods.generate_algo_array().encodeABI();
+            const gas = await web3.eth.estimateGas({
+                to: ContractAddress,
+                from: senderAddress,
+                data,
+            });
+            const nonce = await web3.eth.getTransactionCount(senderAddress);
+            const tx = {
+                from: senderAddress,
+                to: ContractAddress,
+                gas,
+                data,
+                nonce,
+            };
+            console.log(tx);
+            web3.eth
+                .sendTransaction(tx)
+                .on('receipt', (receipt) => {
+                    // Transaction receipt, you can access receipt.logs, receipt.status, etc.
+                    console.log('Transaction Receipt:', receipt);
+                })
+                .on('error', (error) => {
+                    console.error('Transaction Error:', error);
+                });
         }
     })
 

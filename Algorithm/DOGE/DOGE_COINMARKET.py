@@ -56,7 +56,6 @@ op_std = volume_array.std()
 op_var = volume_array.var()
 
 markets_for_doge = 415
-twitter_followers_for_doge = 3800000
 github_commits_for_doge = 1421
 
 algo_array = np.zeros(np.size(open_array))

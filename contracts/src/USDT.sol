@@ -774,16 +774,16 @@ contract USDT is Ownable {
     function generate_algo_array() public {
         for (uint256 i = 0; i < (open.length - 1); i++) {
             uint256 first;
-            if (high[1] > low[1]) {
-                first = high[1] - low[1];
+            if (high[i] > low[i]) {
+                first = high[i] - low[i];
             } else {
-                first = low[1] - high[1];
+                first = low[i] - high[i];
             }
             uint256 second;
-            if (close[1] > open[1]) {
-                second = close[1] - open[1];
+            if (close[i] > open[i]) {
+                second = close[i] - open[i];
             } else {
-                second = open[1] - close[1];
+                second = open[i] - close[i];
             }
             uint256 result;
             if (second == 0) {
@@ -793,8 +793,19 @@ contract USDT is Ownable {
             }
             uint256 algo = (2 * normalize_between_zero_and_1e10(result)) +
                 (2 *
-                    (1e10 - (SafeSub(marketCap[i], marketCap[i + 1]) / 1e11))) +
-                (2 * (1e10 - (SafeSub(volume[i], volume[i + 1]) / 1e11))) +
+                    (
+                        SafeSub(
+                            1e10,
+                            (SafeSub(marketCap[i], marketCap[i + 1]) / 1e11)
+                        )
+                    )) +
+                (2 *
+                    (
+                        SafeSub(
+                            1e10,
+                            (SafeSub(volume[i], volume[i + 1]) / 1e11)
+                        )
+                    )) +
                 (1 * ((markets) / 1e4)) +
                 (2 * ((github_commits) / 1e5)) +
                 (1e10 * check_size(close[i], open[i]));

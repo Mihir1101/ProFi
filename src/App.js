@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axiosGraph from './constant/graph/axiosGraph';
 import { graphid } from './constant/graph/graphid';
 import { tokenImage } from './constant/images/images';
+import Navbar from './components/Navbar';
 import './styles/App.css';
 
 function App() {
@@ -12,9 +13,9 @@ function App() {
     const fetchdata = async () => {
       const data = await axiosGraph.post(
         `${graphid}`,
-        { 
+        {
           //More lokens can be queried some of them are !!!
-          //"MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD"
+          //"MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD", "ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD"
           query: `
             {
               assetPairs(
@@ -38,11 +39,11 @@ function App() {
   return (
 
     <main>
+      <Navbar />
       {data ? (
         <div>
-          <h1 className='header'>Tokens</h1>
           <div className='card-container'>
-          {data.map((item, index) => {
+            {data.map((item, index) => {
               // Split the token ID and take the part before "/USD"
               const tokenId = item.id.split('/')[0];
               return (

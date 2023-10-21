@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import TokenDetail from './components/TokenDetail';
+import About from './components/About';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const Routes = createBrowserRouter([
   { path: '/', element: <App /> },
-  { path: '/id', element: <TokenDetail />}
+  { path: '/id', element: <TokenDetail />},
+  { path: '/about', element: <About />}
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

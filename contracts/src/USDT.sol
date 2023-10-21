@@ -118,7 +118,7 @@ contract USDT is Ownable {
         uint256 value
     ) public pure returns (uint256) {
         unchecked {
-            while (value >= 1e10) {
+            while (value > 1e10) {
                 value /= 10;
             }
             while (value < 0) {
@@ -150,16 +150,16 @@ contract USDT is Ownable {
     function generate_algo_array() public {
         for (uint256 i = 0; i < (open.length - 1); i++) {
             uint256 first;
-            if (high[0] > low[0]) {
-                first = high[0] - low[0];
+            if (high[1] > low[1]) {
+                first = high[1] - low[1];
             } else {
-                first = low[0] - high[0];
+                first = low[1] - high[1];
             }
             uint256 second;
-            if (close[0] > open[0]) {
-                second = close[0] - open[0];
+            if (close[1] > open[1]) {
+                second = close[1] - open[1];
             } else {
-                second = open[0] - close[0];
+                second = open[1] - close[1];
             }
             uint256 result;
             if (second == 0) {

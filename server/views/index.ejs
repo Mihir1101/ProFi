@@ -42,9 +42,6 @@
     <input type="number" id="market">
     <button id="update_market">Update Markets</button>
     <hr>
-    <input type="number" id="twitterFollowers">
-    <button id="update_twitter_followers">Update Twitter Followers</button>
-    <hr>
     <input type="number" id="githubCommits">
     <button id="update_gituhb_commits">Update Github Commits</button>
     <hr>
@@ -111,9 +108,8 @@
             const volume = result[4];
             const marketCap = result[5];
             const markets = result[6];
-            const twitterFollowers = result[7];
-            const githubCommits = result[8];
-            const algoArray = result[9];
+            const githubCommits = result[7];
+            const algoArray = result[8];
             console.log('Open:', open);
             console.log('Close:', close);
             console.log('High:', high);
@@ -121,7 +117,6 @@
             console.log('Volume:', volume);
             console.log('Market Cap:', marketCap);
             console.log('Markets:', markets);
-            console.log('Twitter Followers:', twitterFollowers);
             console.log('GitHub Commits:', githubCommits);
             console.log('Algo Array:', algoArray);
         }
@@ -487,58 +482,6 @@
                 let marketValue = document.getElementById("market").value;
                 const contract = new web3.eth.Contract(ContractABI, ContractAddress);
                 const data = contract.methods.update_markets(marketValue).encodeABI();
-                const gas = await web3.eth.estimateGas({
-                    to: ContractAddress,
-                    from: senderAddress,
-                    data,
-                });
-                const nonce = await web3.eth.getTransactionCount(senderAddress);
-                const tx = {
-                    from: senderAddress,
-                    to: ContractAddress,
-                    gas,
-                    data,
-                    nonce,
-                };
-                console.log(tx);
-                web3.eth
-                    .sendTransaction(tx)
-                    .on('receipt', (receipt) => {
-                        // Transaction receipt, you can access receipt.logs, receipt.status, etc.
-                        console.log('Transaction Receipt:', receipt);
-                    })
-                    .on('error', (error) => {
-                        console.error('Transaction Error:', error);
-                    });
-            }
-        }
-    })
-
-    // ========================================================
-    //                     TWITTER_FOLLOWERS
-    // ========================================================
-
-    let update_twitter_followers = document.getElementById("update_twitter_followers");
-    
-    update_twitter_followers.addEventListener("click", async () => {
-        if (web3.currentProvider.isMetaMask) {
-            const accounts = await web3.eth.getAccounts();
-            if (accounts.length === 0) {
-                console.log("No Ethereum account connected.");
-                return;
-            }
-            
-            const senderAddress = accounts[0];
-            console.log(senderAddress);
-            let ContractABI = <%- JSON.stringify(contractABI) %>;
-            let ContractAddress = <%- JSON.stringify(contractAddress) %>;
-            let DeployerAddress = <%- JSON.stringify(Deployer) %>;
-            console.log(ContractABI);
-            console.log(ContractAddress);
-            if (DeployerAddress == senderAddress) {
-                let twitterFollowers = document.getElementById("twitterFollowers").value;
-                const contract = new web3.eth.Contract(ContractABI, ContractAddress);
-                const data = contract.methods.update_twitter_followers(twitterFollowers).encodeABI();
                 const gas = await web3.eth.estimateGas({
                     to: ContractAddress,
                     from: senderAddress,

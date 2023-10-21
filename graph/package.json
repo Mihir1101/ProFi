@@ -1,13 +1,13 @@
 {
-  "name": "graph",
+  "name": "profi",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ graph",
-    "create-local": "graph create --node http://localhost:8020/ graph",
-    "remove-local": "graph remove --node http://localhost:8020/ graph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 graph",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ profi",
+    "create-local": "graph create --node http://localhost:8020/ profi",
+    "remove-local": "graph remove --node http://localhost:8020/ profi",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 profi",
     "test": "graph test"
   },
   "dependencies": {

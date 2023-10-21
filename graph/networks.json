@@ -1,7 +1,7 @@
 {
   "mainnet": {
-    "profi-graph": {
-      "address": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+    "Contract": {
+      "address": "0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD",
       "startBlock": 0
     }
   }

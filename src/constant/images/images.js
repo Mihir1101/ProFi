@@ -6,6 +6,8 @@ import matic from '../../stock/tokens/polygon-matic-logo.svg';
 import doge from '../../stock/tokens/dogecoin-doge-logo.svg';
 import ltc from '../../stock/tokens/litecoin-ltc-logo.svg';
 import none from '../../stock/tokens/null.png';
+import BNB from '../../stock/tokens/bnb.png';
+import USDT from '../../stock/tokens/usdt.png';
 
 export function tokenImage(id) {
   switch (id) {
@@ -23,6 +25,10 @@ export function tokenImage(id) {
       return doge;
     case 'LTC':
       return ltc;
+    case 'BNB':
+      return BNB;
+    case 'USDT':
+      return USDT;
     default:
       return none;
   }

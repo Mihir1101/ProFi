@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axiosGraph from './constant/graph/axiosGraph';
 import { graphid } from './constant/graph/graphid';
-import PushMessage from './components/PushMessage';
 import { tokenImage } from './constant/images/images';
 import './styles/App.css';
 
@@ -19,7 +18,7 @@ function App() {
           query: `
             {
               assetPairs(
-                where: {id_in: ["ETH/USD", "AAVE/USD", "LINK/USD", "MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD"]}
+                where: {id_in: ["ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD"]}
                 orderBy: currentPrice
                 orderDirection: desc
               ) {
@@ -59,7 +58,6 @@ function App() {
               );
             })}
           </div>
-          <PushMessage />
         </div>
       ) : (
         <h1>loading</h1>

@@ -19,7 +19,7 @@ function App() {
           query: `
             {
               assetPairs(
-                where: {id_in: ["ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD", "MATIC/USD", "LTC/USD", "LINK/USD", "APE/USD"]}
+                where: {id_in: ["ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD", "APE/USD"]}
                 orderBy: currentPrice
                 orderDirection: desc
               ) {

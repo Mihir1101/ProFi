@@ -12,9 +12,9 @@ It gives the flexibility to use SQLite databases & run personalised queries.
 
 # Challenges
 
-'''
+```
 $ studio import-data users ./data.csv --pid eac4b0f2-ab4d-41ec-9789-19f0a4905615 
-''' 
+```
 * They couldn't add the feature to directly populate a table with csv files as shown above:
 
 So, we used the unconventional method as suggested by the dev team at Tableland .
@@ -24,9 +24,9 @@ then, we used the [Studio Console UI](https://console.tableland.xyz/) for query 
 
 
 Then, we used the :
-'''bash
+```
 tableland write --file "./bnb.sql"
-'''
+```
 # Results
 We were able to successfully store the financial data for BNB token on Tableland & deployed it on the OP-Goerli Testnet!
 

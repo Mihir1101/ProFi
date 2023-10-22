@@ -1,6 +1,7 @@
 # ProFI X Mantle
 
-Mantle is super fast, that is why we deployed all of our contracts on it. 
+Mantle is *super fast* , that is why we deployed all of our contracts on it! Literally all of it!
+It's too smooth to use! We had an unseen experience!
 
 1. ARB.sol --> 0x8AaFabC0711Cd5508f1B775e78BB40cd6296cFe5 , <a href="https://explorer.testnet.mantle.xyz/tx/0x85a0bc5eb4ea389740aa439d6c5c9018699d182859437660e2c9510c731d4e20">View on Explorer</a>
 2. BNB.sol --> 0x7FAe0edA5Ce5113F4F6dCAc3c3252EA1a4F70Eb6 , <a href="https://explorer.testnet.mantle.xyz/tx/0xc51374c6a225683db220d1d33fc972a3eda708288c3239335e4c139333594b26">View on Explorer</a>
@@ -12,4 +13,4 @@ Mantle is super fast, that is why we deployed all of our contracts on it.
 8. PUSH.sol --> 0x46de9190a00A27c1a8F7Cf760cb3Ad8625E48556 , <a href="https://explorer.testnet.mantle.xyz/tx/0xd1090bab2b1015d594e25dc5079c69e40e4f5ac9015102369f325883a18f683d">View on Explorer</a>
 9. USDT.sol --> 0x0E414Ab9b0A21FB5c0C15A06900FEa78B886ab36 , <a href="https://explorer.testnet.mantle.xyz/tx/0x4376c0a0729da9955936e9fc16319d7a2e95088329325b0efa210bea63701667">View on Explorer</a>
 
-Twitter Link --> 
+Twitter Link --> [Submission Tweet](https://x.com/V2211211274313/status/1716057003800293822?s=20) 

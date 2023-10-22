@@ -15,7 +15,8 @@ It gives the flexibility to use SQLite databases & run personalised queries.
   
 '''bash
 $ studio import-data users ./data.csv --pid eac4b0f2-ab4d-41ec-9789-19f0a4905615 
-'''
+''' 
+
 So, we used the unconventional method as suggested by the dev team at Tableland .
 
 We first converted [CSV to SQL](https://www.convertcsv.com/csv-to-sql.htm),

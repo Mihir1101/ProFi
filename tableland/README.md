@@ -29,3 +29,4 @@ tableland write --file "./bnb.sql"
 '''
 # Results
 We were able to successfully store the financial data for BNB token on Tableland & deployed it on the OP-Goerli Testnet!
+

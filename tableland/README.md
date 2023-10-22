@@ -11,11 +11,11 @@ It gives the flexibility to use SQLite databases & run personalised queries.
 
 
 # Challenges
-* They couldn't add the feature to directly populate a table with csv files as below:
-  
+
 '''
 $ studio import-data users ./data.csv --pid eac4b0f2-ab4d-41ec-9789-19f0a4905615 
 ''' 
+* They couldn't add the feature to directly populate a table with csv files as shown above:
 
 So, we used the unconventional method as suggested by the dev team at Tableland .
 

@@ -34,9 +34,7 @@ And bang! We found the cause of this decreasing positive sentiment among newbies
 So, we developed a solution!
 A pretty good one to be honest...
 
-We introduce you to ProFi!
-
-The one stop platform for all your crypto trading needs! 
+Pkease let me introduce you to ProFi! - The one stop platform for all your crypto trading needs! 
 ![](https://github.com/Mihir1101/ProFi/blob/124cc62a8a6fb7c9acd4e2e8caade7021d14238e/WhatsApp%20Image%202023-10-22%20at%207.02.16%20PM.jpeg)
 
 # What we do

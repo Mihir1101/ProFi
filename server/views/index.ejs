@@ -163,6 +163,18 @@
         }
     })
 
+    function customSigmoid(x) {
+    const a = 10; // The upper bound for values above 4.6
+    const b = 2;  // The lower bound for values below 4.6
+    const k = 4.6; // The threshold value
+  
+    if (x >= k) {
+      return a / (1 + Math.exp(-k * (x - 4.6)));
+    } else {
+      return b / (1 + Math.exp(k * (x - 4.6)));
+    }
+  }
+
     GetSafeness.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
             const accounts = await web3.eth.getAccounts();
@@ -178,17 +190,19 @@
             console.log(ContractABI);
             console.log(ContractAddress);
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
-            const result = await contract.methods.return_safeness_score().call();
+            let result = await contract.methods.return_safeness_score().call();
+            result = result/1e10;
+            result = customSigmoid(result);
             console.log("This is the SafeNess Score : ", result);
-            if (result/1e10 < 4 && result/1e10 > 0) {
-                safeScore.innerHTML = result/1e10 + "😡";
+            if (result < 4 && result > 0) {
+                safeScore.innerHTML = result + "😡";
                 safeScore.classList.add("red");
-            } else if (result/1e10 < 6 && result/1e10 > 4) {
-            safeScore.innerHTML = result/1e10 + "😐";
+            } else if (result < 6 && result > 4) {
+            safeScore.innerHTML = result + "😐";
             safeScore.classList.add("yellow");
-        } else  if (result/1e10 > 6 && result/1e10 < 10){
-            safeScore.classList.add("green") + "😀";
-            safeScore.innerHTML = result/1e10;
+        } else  if (result > 6 && result < 10){
+            safeScore.innerHTML = result + "😀";
+            safeScore.classList.add("green");
         }
         }
     })

@@ -9,7 +9,7 @@ const FileCoinContractAddressArray = ["ARB", "BNB", "0xE6dD79C6D7C1B959E6DD87838
 const MantleContractAddressArray = ["ARB", "BNB", "0x7d1bB6B83EdCB9378d3C4647E218BCB1Dea19CCE", "0x79bd4b4c662810f049171FDEb3563826b12Df65B", "0xE6dD79C6D7C1B959E6DD87838ed8cA571c632172", "OP", "PEPE", "PUSH", "USDT"];
 const TOKENS = ["ARB", "BNB", "BTC", "DOGE", "ETH", "OP", "PEPE", "PUSH", "USDT"]
 let contractABIArray = ["", "", "", "", "", "", "", "", ""];
-let DeployerArray = ["ARB", "BNB", "0x0c0a01d30bc2efc35954dfba5c498069f5ceedb2", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "OP", "PEPE", "PUSH", "USDT"];
+let DeployerArray = ["ARB", "BNB", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "OP", "PEPE", "PUSH", "USDT"];
 
 for (let i = 0; i < TOKENS.length; i++) {
     fs.readFile(`../contracts/out/${TOKENS[i]}.sol/${TOKENS[i]}.json`, 'utf8', (err, data) => {

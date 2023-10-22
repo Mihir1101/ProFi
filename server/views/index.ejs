@@ -89,7 +89,7 @@
             }
             console.log("Connected address:", connectedAddress);
             console.log("Deployer address:", deployerAddress);
-            if (deployerAddress == connectedAddress){
+            if (parseInt(deployerAddress,16) == parseInt(connectedAddress,16)){
             ownerDiv.style.display = "flex";   
             } else {
                 ownerDiv.style.display = "none";
@@ -152,14 +152,14 @@
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
             const result = await contract.methods.getParams().call();
             console.log(result);
-            document.getElementById("open").innerHTML = "Open : "+result[0][result[0].length - 2]/1e10;
-            document.getElementById("close").innerHTML = "Close : "+result[1][result[1].length - 1]/1e10;
-            document.getElementById("high").innerHTML= "High : "+result[2][result[2].length - 1]/1e10;
-            document.getElementById("low").innerHTML= "Low : "+result[3][result[3].length - 1]/1e10;
-            document.getElementById("volume").innerHTML= "Volume : "+result[4][result[4].length - 1];
-            document.getElementById("MarketCap").innerHTML = "Market Cap : "+result[5][result[5].length - 1];
-            document.getElementById("markets").innerHTML = "Current number of DEX's : "+result[6][result[6].length - 1];
-            document.getElementById("githubCommits").innerHTML = "Github Commit : "+result[7][result[7].length - 1];
+            document.getElementById("open").innerHTML = "Open : $ "+result[0][result[0].length - 1]/1e10;
+            document.getElementById("close").innerHTML = "Close : $ "+result[1][result[1].length - 1]/1e10;
+            document.getElementById("high").innerHTML= "High : $ "+result[2][result[2].length - 1]/1e10;
+            document.getElementById("low").innerHTML= "Low : $ "+result[3][result[3].length - 1]/1e10;
+            document.getElementById("volume").innerHTML= "Volume : $ "+result[4][result[4].length - 1]/1e10;
+            document.getElementById("MarketCap").innerHTML = "Market Cap : $ "+result[5][result[5].length - 1]/1e10;
+            document.getElementById("market").innerHTML = "Current number of DEX's : "+result[6]/1e10;
+            document.getElementById("githubCommits").innerHTML = "Github Commit : "+result[7]/1e10;
         }
     })
 
@@ -195,13 +195,13 @@
             result = customSigmoid(result);
             console.log("This is the SafeNess Score : ", result);
             if (result < 4 && result > 0) {
-                safeScore.innerHTML = result + "😡";
+                safeScore.innerHTML = (result.toString()).slice(0, 10) + "😡";
                 safeScore.classList.add("red");
             } else if (result < 6 && result > 4) {
-            safeScore.innerHTML = result + "😐";
+            safeScore.innerHTML = (result.toString()).slice(0, 10) + "😐";
             safeScore.classList.add("yellow");
         } else  if (result > 6 && result < 10){
-            safeScore.innerHTML = result + "😀";
+            safeScore.innerHTML = (result.toString()).slice(0, 10) + "😀";
             safeScore.classList.add("green");
         }
         }

@@ -19,7 +19,7 @@ function App() {
           query: `
             {
               assetPairs(
-                where: {id_in: ["ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD", "MATIC/USD", "LTC/USD", "LINK/USD"]}
+                where: {id_in: ["ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD", "MATIC/USD", "LTC/USD", "LINK/USD", "APE/USD"]}
                 orderBy: currentPrice
                 orderDirection: desc
               ) {
@@ -41,7 +41,7 @@ function App() {
     <main>
       <Navbar />
       {data ? (
-        <div>
+        <div className='container'>
           <div className='card-container'>
             {data.map((item, index) => {
               // Split the token ID and take the part before "/USD"

@@ -15,12 +15,12 @@ function Navbar() {
     }, []);
     return (
         < div className='navDiv'>
-            <h4>VasuK111</h4>
+            <h4>Team name: VasuK111</h4>
             <nav class="header">
                 <a className='' href="/">Tokens</a>
                 <a className='' href="/about">About</a>
             </nav>
-            <button><a href='https://studio.tableland.xyz/vasuk111/ethonline23/deployments/default/bnb_data_420_37'>Mantle's Address</a></button>
+            <button><a href='https://studio.tableland.xyz/vasuk111/ethonline23/deployments/default/bnb_data_420_37'><b>Tableland's</b> Address</a></button>
         </div>
     );
 }

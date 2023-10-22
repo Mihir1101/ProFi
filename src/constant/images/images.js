@@ -8,6 +8,7 @@ import ltc from '../../stock/tokens/litecoin-ltc-logo.svg';
 import none from '../../stock/tokens/null.png';
 import BNB from '../../stock/tokens/bnb.png';
 import USDT from '../../stock/tokens/usdt.png';
+import APE from '../../stock/tokens/ape.png';
 
 export function tokenImage(id) {
   switch (id) {
@@ -29,6 +30,8 @@ export function tokenImage(id) {
       return BNB;
     case 'USDT':
       return USDT;
+    case 'APE':
+      return APE;
     default:
       return none;
   }

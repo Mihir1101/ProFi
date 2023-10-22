@@ -19,4 +19,19 @@ What you see above is just one example of what are the sentiments of people abou
 
 # The ProFi Land
 
+Well, that is a problem! A major one...
 
+So, we began searching... A lot of google searches, twitter & discord stalkings, & what not!
+But what we found out was just disheartening!
+
+*What once seemed to be a hope of power of the money given back to the common people has now turned into a trap hole for most!*
+
+For 1 authentic token on an average there are around 2-3 ponzi tokens existing in the crypto market! 
+
+And bang! We found the cause of this decreasing positive sentiment among newbies. It's the fear of losing money, the exorbitant risk associated.
+
+
+So, we developed a solution!
+A pretty good one to be honest...
+
+![]

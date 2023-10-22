@@ -98,14 +98,6 @@
             } else {
                 // Connect wallet
                 const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-                console.log("account",parseInt(accounts[0], 16),accounts[0]);
-                let DeployerAddress = <%- JSON.stringify(Deployer) %>;
-                console.log("Deployer",parseInt(DeployerAddress, 16),DeployerAddress);
-                if(parseInt(DeployerAddress, 16) == parseInt(accounts[0], 16)) {
-                    console.log("@mihir, Compared the two addresses :)");
-                } else {
-                    console.log("Be more kind bro !!!");
-                }
                 window.web3 = new Web3(window.ethereum);
                 const truncatedAddress = accounts[0].slice(0, 10) + "...";
                 document.getElementById("connectButton").textContent = `${truncatedAddress}`;

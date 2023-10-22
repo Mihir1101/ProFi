@@ -17,7 +17,6 @@ function Navbar() {
         <div>
             <nav class="header">
                 <a className='' href="/">Tokens</a>
-                <a className='' href="http://localhost:3000/" >Chat</a>
                 <a className='' href="/about">About</a>
             </nav>
         </div>

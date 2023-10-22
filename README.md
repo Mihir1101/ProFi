@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+# The World of CryptoCurrencies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is Web3! 
+Money flows like anything here
 
-## Available Scripts
+![](https://github.com/Mihir1101/ProFi/blob/b75b165032335a3b9aa096ffee2abe60825c40c7/Screen-Shot-2022-06-24-at-1.58.19-PM.webp)
 
-In the project directory, you can run:
+Another one !
 
-### `npm start`
+![](https://github.com/Mihir1101/ProFi/blob/b75b165032335a3b9aa096ffee2abe60825c40c7/0x0.jpg)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+So much of money, so much shine, so much news, so much craze! Well, this is what the world of Cryptocurrencies looks like... and what I just showed you was barely even the bottom of this mountain!
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Well, this all seems amazing on tv screens but when it comes to an average man, the story says something different !
 
-### `npm test`
+![](https://github.com/Mihir1101/ProFi/blob/71d74d33b24f75e15b6cbb3338f35f0bd8a18768/file-20230622-23-nsj882.avif)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+What you see above is just one example of what are the sentiments of people about crypto space. 
 
-### `npm run build`
+# The ProFi Land
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

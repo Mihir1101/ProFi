@@ -17,54 +17,60 @@
     <div class="heroDiv">
         <div class="leftDiv">
             <p id="safeScore"></p>
-            <button id="get_safeness">Get Safeness Score</button>
+            <button id="get_safeness" class="divBtn" >Get Safe Score</button>
         </div>
         <div class="centerDiv">
             <h1>
-                <span id="contractAddressDisplay">
+                    <% if (token === 'ETH') { %>
+                        <img src="../stock/eth.png" class="detailLogo">
+                    <% } else if (token === 'BTC') { %>
+                        <img src="../stock/btc.png" class="detailLogo">
+                    <% } else if (token === 'DOGE') { %>
+                        <img src="../stock/doge.png" class="detailLogo">
+                    <% } else if (token === 'USDT') { %>
+                        <img src="../stock/usdt.png" class="detailLogo">
+                    <% } else { %>
+                        <img src="../stock/noImg.png" class="detailLogo">
+                    <% } %>
+                <p id="contractAddressDisplay">
                     <%= contractAddress.slice(0, 5) + "..." + contractAddress.slice(-5) %>
-                </span>
-                <button id="copyAddressButton" onclick="copyAddress()">
-                    <i class="fas fa-copy"></i>
-                </button>
+                    <button id="copyAddressButton" onclick="copyAddress()">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </p>
             </h1>
         </div>
         <div class="rightDiv">
-            <button id="get_params">Get Params</button>
+            <div id="params">
+                <p id="open"></p>
+                <p id="close"></p>
+                <p id="high"></p>
+                <p id="low"></p>
+                <p id="volume"></p>
+                <p id="MarketCap"></p>
+                <p id="market"></p>
+                <p id="githubCommits"></p>
+            </div>
+            <button id="get_params" class="divBtn">Get Params</button>
         </div>
     </div>
-    <!-- 
-    <hr>
-    <button id="gen_algo">Generate Algo Array</button>
-    <hr>
-    <hr>
-    <input type="number" id="open">
-    <button id="add_to_open">Add to Open Array</button>
-    <hr>
-    <input type="number" id="close">
-    <button id="add_to_close">Add to Close Array</button>
-    <hr>
-    <input type="number" id="high">
-    <button id="add_to_high">Add to High Array</button>
-    <hr>
-    <input type="number" id="low">
-    <button id="add_to_low">Add to Low Array</button>
-    <hr>
-    <input type="number" id="volume">
-    <button id="add_to_volume">Add to Volume Array</button>
-    <hr>
-    <input type="number" id="MarketCap">
-    <button id="add_to_MarketCap">Add to Market Cap Array</button>
-    <hr>
-    <input type="number" id="market">
-    <button id="update_market">Update Markets</button>
-    <hr>
-    <input type="number" id="githubCommits">
-    <button id="update_gituhb_commits">Update Github Commits</button>
-    <hr> -->
+    <div id="ownerDiv">
+        <button id="gen_algo">Generate Algo Array</button>
+        <button id="add_to_open">Add to Open Array<input type="number" id="open"></button>
+        <button id="add_to_close">Add to Close Array<input type="number" id="close"></button>
+        <button id="add_to_high">Add to High Array<input type="number" id="high"></button>
+        <button id="add_to_low">Add to Low Array<input type="number" id="low"></button>
+        <button id="add_to_volume">Add to Volume Array<input type="number" id="volume"></button>
+        <button id="add_to_MarketCap">Add to Market Cap Array<input type="number" id="MarketCap"></button>
+        <button id="update_market">Update Markets<input type="number" id="market"></button>
+        <button id="update_gituhb_commits">Update Github Commits<input type="number" id="githubCommits"></button>
+        </div>
 </body>
 
 <script>
+    let connectedAddress;
+    let deployerAddress = <%- JSON.stringify(Deployer) %>;
+    let ownerDiv = document.getElementById("ownerDiv");
     async function connectOrDisconnect() {
         if (window.ethereum) {
             if (window.web3) {
@@ -76,14 +82,23 @@
                 // Connect wallet
                 const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
                 window.web3 = new Web3(window.ethereum);
+                connectedAddress = accounts[0];
                 const truncatedAddress = accounts[0].slice(0, 10) + "...";
                 document.getElementById("connectButton").textContent = `${truncatedAddress}`;
                 console.log("Wallet connected");
+            }
+            console.log("Connected address:", connectedAddress);
+            console.log("Deployer address:", deployerAddress);
+            if (deployerAddress == connectedAddress){
+            ownerDiv.style.display = "flex";   
+            } else {
+                ownerDiv.style.display = "none";
             }
         } else {
             console.log("No wallet");
         }
     }
+
     function copyAddress() {
         // Create a new text area element to store the contract address
         const textArea = document.createElement("textarea");
@@ -137,26 +152,28 @@
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
             const result = await contract.methods.getParams().call();
             console.log(result);
-            const open = result[0];
-            const close = result[1];
-            const high = result[2];
-            const low = result[3];
-            const volume = result[4];
-            const marketCap = result[5];
-            const markets = result[6];
-            const githubCommits = result[7];
-            const algoArray = result[8];
-            console.log('Open:', open);
-            console.log('Close:', close);
-            console.log('High:', high);
-            console.log('Low:', low);
-            console.log('Volume:', volume);
-            console.log('Market Cap:', marketCap);
-            console.log('Markets:', markets);
-            console.log('GitHub Commits:', githubCommits);
-            console.log('Algo Array:', algoArray);
+            document.getElementById("open").innerHTML = "Open : "+result[0][result[0].length - 2]/1e10;
+            document.getElementById("close").innerHTML = "Close : "+result[1][result[1].length - 1]/1e10;
+            document.getElementById("high").innerHTML= "High : "+result[2][result[2].length - 1]/1e10;
+            document.getElementById("low").innerHTML= "Low : "+result[3][result[3].length - 1]/1e10;
+            document.getElementById("volume").innerHTML= "Volume : "+result[4][result[4].length - 1];
+            document.getElementById("MarketCap").innerHTML = "Market Cap : "+result[5][result[5].length - 1];
+            document.getElementById("markets").innerHTML = "Current number of DEX's : "+result[6][result[6].length - 1];
+            document.getElementById("githubCommits").innerHTML = "Github Commit : "+result[7][result[7].length - 1];
         }
     })
+
+    function customSigmoid(x) {
+    const a = 10; // The upper bound for values above 4.6
+    const b = 2;  // The lower bound for values below 4.6
+    const k = 4.6; // The threshold value
+  
+    if (x >= k) {
+      return a / (1 + Math.exp(-k * (x - 4.6)));
+    } else {
+      return b / (1 + Math.exp(k * (x - 4.6)));
+    }
+  }
 
     GetSafeness.addEventListener("click", async () => {
         if (web3.currentProvider.isMetaMask) {
@@ -173,15 +190,19 @@
             console.log(ContractABI);
             console.log(ContractAddress);
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
-            const result = await contract.methods.return_safeness_score().call();
+            let result = await contract.methods.return_safeness_score().call();
+            result = result/1e10;
+            result = customSigmoid(result);
             console.log("This is the SafeNess Score : ", result);
-            safeScore.innerHTML = result/1e10;
-            if (result/1e10 < 4 && result/1e10 > 0) {
-            safeScoreElement.classList.add("red");
-        } else if (result/1e10 < 6) {
-            safeScoreElement.classList.add("yellow");
-        } else {
-            safeScoreElement.classList.add("green");
+            if (result < 4 && result > 0) {
+                safeScore.innerHTML = result + "😡";
+                safeScore.classList.add("red");
+            } else if (result < 6 && result > 4) {
+            safeScore.innerHTML = result + "😐";
+            safeScore.classList.add("yellow");
+        } else  if (result > 6 && result < 10){
+            safeScore.innerHTML = result + "😀";
+            safeScore.classList.add("green");
         }
         }
     })

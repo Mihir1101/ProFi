@@ -15,11 +15,11 @@ function App() {
         `${graphid}`,
         {
           //More lokens can be queried some of them are !!!
-          //"MATIC/USD","DOGE/USD", "LTC/USD", "BTC/USD", "ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD"
+          //"MATIC/USD", "LTC/USD", "ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD"
           query: `
             {
               assetPairs(
-                where: {id_in: ["ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD"]}
+                where: {id_in: ["ETH/USD","DOGE/USD", "BTC/USD", "BNB/USD", "USDT/USD", "MATIC/USD", "LTC/USD", "LINK/USD"]}
                 orderBy: currentPrice
                 orderDirection: desc
               ) {

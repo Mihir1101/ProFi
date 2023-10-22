@@ -24,4 +24,8 @@ And, the following are the contract addresses for all the contracts we deployed 
 9. USDT.sol --> 0xD759Ea32961Aaf6D3e09c1d731d8f1e3592Ad005
 
 
+# Why Filecoin
+* Well, the game involves money, and we are a fair player yeah 😇.So, yes anyone including you can headover to the contracts deployed on Filecoin using the addresses mentioned above & plug in the values into the main algorithm formula & cross-verify the results 🥰!
+
+It's public & yes, it's *actually honest* 😎!
 Building on Filecoin was an amazing experience for our team!

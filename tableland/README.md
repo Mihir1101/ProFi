@@ -1,6 +1,8 @@
 # Magical Tableland
 
 **We used the Tableland Studio CLI for our project**
+*Team Name* : VasuK111
+[*Dev Address*](https://studio.tableland.xyz/vasuk111/ethonline23/deployments/default/bnb_data_420_37)
 
 So ya, once we were done with data, it was the time to store it. We did it on Web3.storage but there was one major issue over our head.
 This is financial data and that has to be updated as every single day passes down. How do we do that with traditional IPFS style databases?

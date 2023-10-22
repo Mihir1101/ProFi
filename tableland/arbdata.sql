@@ -1,0 +1,1 @@
+CREATE TABLE mytable (open blob, high blob, low blob, close blob, volume blob, marketcap blob, timestamp blob)

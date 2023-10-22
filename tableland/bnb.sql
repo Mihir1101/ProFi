@@ -1,0 +1,1 @@
+CREATE TABLE bnb_data (open int, high int, low int, close int, volume int, marketcap int)

@@ -55,34 +55,15 @@
         </div>
     </div>
     <div id="ownerDiv">
-        <hr>
         <button id="gen_algo">Generate Algo Array</button>
-        <hr>
-        <hr>
-        <input type="number" id="open">
-        <button id="add_to_open">Add to Open Array</button>
-        <hr>
-        <input type="number" id="close">
-        <button id="add_to_close">Add to Close Array</button>
-        <hr>
-        <input type="number" id="high">
-        <button id="add_to_high">Add to High Array</button>
-        <hr>
-        <input type="number" id="low">
-        <button id="add_to_low">Add to Low Array</button>
-        <hr>
-        <input type="number" id="volume">
-        <button id="add_to_volume">Add to Volume Array</button>
-        <hr>
-        <input type="number" id="MarketCap">
-        <button id="add_to_MarketCap">Add to Market Cap Array</button>
-        <hr>
-        <input type="number" id="market">
-        <button id="update_market">Update Markets</button>
-        <hr>
-        <input type="number" id="githubCommits">
-        <button id="update_gituhb_commits">Update Github Commits</button>
-        <hr>
+        <button id="add_to_open">Add to Open Array<input type="number" id="open"></button>
+        <button id="add_to_close">Add to Close Array<input type="number" id="close"></button>
+        <button id="add_to_high">Add to High Array<input type="number" id="high"></button>
+        <button id="add_to_low">Add to Low Array<input type="number" id="low"></button>
+        <button id="add_to_volume">Add to Volume Array<input type="number" id="volume"></button>
+        <button id="add_to_MarketCap">Add to Market Cap Array<input type="number" id="MarketCap"></button>
+        <button id="update_market">Update Markets<input type="number" id="market"></button>
+        <button id="update_gituhb_commits">Update Github Commits<input type="number" id="githubCommits"></button>
         </div>
 </body>
 
@@ -106,11 +87,12 @@
                 document.getElementById("connectButton").textContent = `${truncatedAddress}`;
                 console.log("Wallet connected");
             }
+            console.log("Connected address:", connectedAddress);
+            console.log("Deployer address:", deployerAddress);
             if (deployerAddress == connectedAddress){
-                ownerDiv.style.display = "block";
-            }else {
+            ownerDiv.style.display = "flex";   
+            } else {
                 ownerDiv.style.display = "none";
-                
             }
         } else {
             console.log("No wallet");
@@ -170,14 +152,14 @@
             const contract = new web3.eth.Contract(ContractABI, ContractAddress);
             const result = await contract.methods.getParams().call();
             console.log(result);
-            // document.getElementById("open").innerHTML = "Open : "+result[0][result[0].length - 2]/1e10;
-            // document.getElementById("close").innerHTML = "Close : "+result[1][result[1].length - 1]/1e10;
-            // document.getElementById("high").innerHTML= "High : "+result[2][result[2].length - 1]/1e10;
-            // document.getElementById("low").innerHTML= "Low : "+result[3][result[3].length - 1]/1e10;
-            // document.getElementById("volume").innerHTML= "Volume : "+result[4][result[4].length - 1];
-            // document.getElementById("MarketCap").innerHTML = "Market Cap : "+result[5][result[5].length - 1];
-            // document.getElementById("markets").innerHTML = "Current number of DEX's : "+result[6][result[6].length - 1];
-            // document.getElementById("githubCommits").innerHTML = "Github Commit : "+result[7][result[7].length - 1];
+            document.getElementById("open").innerHTML = "Open : "+result[0][result[0].length - 2]/1e10;
+            document.getElementById("close").innerHTML = "Close : "+result[1][result[1].length - 1]/1e10;
+            document.getElementById("high").innerHTML= "High : "+result[2][result[2].length - 1]/1e10;
+            document.getElementById("low").innerHTML= "Low : "+result[3][result[3].length - 1]/1e10;
+            document.getElementById("volume").innerHTML= "Volume : "+result[4][result[4].length - 1];
+            document.getElementById("MarketCap").innerHTML = "Market Cap : "+result[5][result[5].length - 1];
+            document.getElementById("markets").innerHTML = "Current number of DEX's : "+result[6][result[6].length - 1];
+            document.getElementById("githubCommits").innerHTML = "Github Commit : "+result[7][result[7].length - 1];
         }
     })
 

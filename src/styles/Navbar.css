@@ -28,3 +28,30 @@
     border-bottom: 2px solid #40c9ff;
     
 }
+
+.navDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1em;
+    padding-left: 1em;
+}
+.navDiv>button>a{
+    text-decoration: none;
+    color: white;
+    padding-bottom: 4px;
+    background-color: #212121;
+    border: none;
+    font-size: 1em;
+}
+.navDiv>button{
+    background-color: #212121;
+    border: none;
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+    margin-left: 1em;
+    margin-right: 1em;
+    border-bottom: 6px solid #40c9ff;
+}

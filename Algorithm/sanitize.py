@@ -10,7 +10,8 @@ marketCap_data = []
 timestamp_data = []
 
 # Replace 'your_data.csv' with the actual file path of your CSV data
-with open('./USDT/USDT_ALL_graph_coinmarketcap.csv', 'r') as csv_file:
+# /APE/APE_All_graph_coinmarketcap.csv
+with open('./APE/APE_All_graph_coinmarketcap.csv', 'r') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')  # Specify the delimiter as ';'
 
     # Skip the header row if it exists
@@ -31,5 +32,5 @@ print("high = ", high_data,";")
 print("low = ", low_data,";")
 print("volume = ",volume_data,";")
 print("marketCap = ", marketCap_data,";")
-print("markets = ", 266790000000000 ,";")
-print("github_commits = ", 1000000000000000,";")
+print("markets = ", 1880000000000 ,";")
+print("github_commits = ", 94130000000000,";")

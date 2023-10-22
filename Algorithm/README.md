@@ -1,5 +1,16 @@
-# The Algorithm 
+# ProFi's Algorithm 
 
+The core part of ProFi lies in it's own algorithm which was developed through many sleepless nights & a lot of sweat flown away...Eww!
+
+# Key Terminologies
+* *Algorithm* - A general formula applicable to all tokens with an accuracy of 85% +.
+* *Weights* - Has an integer value of 1 or 2 & is assigned to each parameter.
+* *Score* - Calculated out of 10. It is a measure of safeness of a token. Higher the score, safer is the token
+  
+We used the simplistic yet effective concept of Weights & biases & assigned weights according to the importance of each parameter in the final score.
+
+The algorithm takes into account the following factors:
+* 
 Our algorithm utilizes algebric group and ring theory to get the following formula : 
 
 ```

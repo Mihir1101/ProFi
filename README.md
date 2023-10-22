@@ -68,5 +68,15 @@ We then assign weights of 1 or 2 to each parameter to get the final number.
 
 5. But we need to constantly update the financial data so we also [deployed it on Tableland](https://github.com/Mihir1101/ProFi/tree/main/tableland)
 
-6. Then, we deployed the smart contracts on Mantle & Scroll.
+6. Then, we deployed the smart contracts on [Mantle](https://github.com/Mihir1101/ProFi/tree/main/mantle) & [Scroll](https://github.com/Mihir1101/ProFi/tree/main/scroll).
+
+# Challenges
+
+* We faced problems in data collection. We couldn't find a subgraph for it so we had to create & deploy our own.
+* We also faced problems in analysing the parameters & assigning appropriate weights to them.
+* Backtesting took around 1 complete week. That took a lot of sweat!
+
+# References  
+
+[Honeypot](https://honeypot.is/)
 

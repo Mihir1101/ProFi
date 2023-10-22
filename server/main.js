@@ -12,7 +12,7 @@ let contractABIArray = ["", "", "", "", "", "", "", "", ""];
 let DeployerArray = ["0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b", "0x7DB89eEadF8a526e7EDaedCF3DdBd0452B7F4c8b"];
 
 for (let i = 0; i < TOKENS.length; i++) {
-    fs.readFile(`../contracts/out/${TOKENS[i]}.sol/${TOKENS[i]}.json`, 'utf8', (err, data) => {
+    fs.readFile(`./out/${TOKENS[i]}.sol/${TOKENS[i]}.json`, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading JSON file:', err);
         } else {

@@ -1,4 +1,4 @@
-# The ProFi Land
+# The World of CryptoCurrencies
 
 This is Web3! 
 Money flows like anything here
@@ -7,5 +7,16 @@ Money flows like anything here
 
 Another one !
 
-[](https://github.com/Mihir1101/ProFi/blob/b75b165032335a3b9aa096ffee2abe60825c40c7/0x0.jpg)
+![](https://github.com/Mihir1101/ProFi/blob/b75b165032335a3b9aa096ffee2abe60825c40c7/0x0.jpg)
+
+So much of money, so much shine, so much news, so much craze! Well, this is what the world of Cryptocurrencies looks like... and what I just showed you was barely even the bottom of this mountain!
+
+Well, this all seems amazing on tv screens but when it comes to an average man, the story says something different !
+
+![](https://github.com/Mihir1101/ProFi/blob/71d74d33b24f75e15b6cbb3338f35f0bd8a18768/file-20230622-23-nsj882.avif)
+
+What you see above is just one example of what are the sentiments of people about crypto space. 
+
+# The ProFi Land
+
 
